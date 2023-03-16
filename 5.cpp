@@ -59,39 +59,40 @@ int run_program(const vector<ll>& original_numbers, int input_value) {
     int ip = 0;
     int last_output;
     for (int ip = 0; numbers[ip] != 99;) {
-        if (numbers[ip] % 100 == 1) {
-            numbers[numbers[ip + 3]] = get_value(numbers, ip, 1) + get_value(numbers, ip, 2);
-            ip += 4;
-        } else if (numbers[ip] % 100 == 2) {
-            numbers[numbers[ip + 3]] = get_value(numbers, ip, 1) * get_value(numbers, ip, 2);
-            ip += 4;
-        } else if (numbers[ip] % 100 == 3) {
-            numbers[numbers[ip + 1]] = input_value;
-            ip += 2;
-        } else if (numbers[ip] % 100 == 4) {
-            last_output = numbers[numbers[ip + 1]];
-            ip += 2;
-        } else if (numbers[ip] % 100 == 5) {
-            if (get_value(numbers, ip, 1) != 0) {
-                ip = get_value(numbers, ip, 2);
-            } else {
-                ip += 3;
-            }
-        } else if (numbers[ip] % 100 == 6) { 
-            if (get_value(numbers, ip, 1) == 0) {
-                ip = get_value(numbers, ip, 2);
-            } else {
-                ip += 3;
-            }
-        } else if (numbers[ip] % 100 == 7) {
-            numbers[numbers[ip + 3]] = int(get_value(numbers, ip, 1) < get_value(numbers, ip, 2));
-            ip += 4;
-        } else if (numbers[ip] % 100 == 8) { 
-            numbers[numbers[ip + 3]] = int(get_value(numbers, ip, 1) == get_value(numbers, ip, 2));
-            ip += 4;
-        } else {
-            cout << "Wrong command " << numbers[ip] << endl;
-            exit(1); 
+        switch (numbers[ip] % 100) {
+            case 1:
+                numbers[numbers[ip + 3]] = get_value(numbers, ip, 1) + get_value(numbers, ip, 2);
+                ip += 4;
+                break;
+            case 2:
+                numbers[numbers[ip + 3]] = get_value(numbers, ip, 1) * get_value(numbers, ip, 2);
+                ip += 4;
+                break;
+            case 3:
+                numbers[numbers[ip + 1]] = input_value;
+                ip += 2;
+                break;
+            case 4:
+                last_output = numbers[numbers[ip + 1]];
+                ip += 2;
+                break;
+            case 5:
+                ip = (get_value(numbers, ip, 1) != 0 ? get_value(numbers, ip, 2) : ip + 3);
+                break;
+            case 6:
+                ip = (get_value(numbers, ip, 1) == 0 ? get_value(numbers, ip, 2) : ip + 3);
+                break;
+            case 7:
+                numbers[numbers[ip + 3]] = int(get_value(numbers, ip, 1) < get_value(numbers, ip, 2));
+                ip += 4;
+                break;
+            case 8:
+                numbers[numbers[ip + 3]] = int(get_value(numbers, ip, 1) == get_value(numbers, ip, 2));
+                ip += 4;
+                break;
+            default:
+                cout << "Wrong command " << numbers[ip] << endl;
+                exit(1);
         }
     }
     return last_output;
