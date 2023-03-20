@@ -42,8 +42,6 @@ vector<string> split(const string& s, char delim=' ') {
     return res;
 }
 
-
-
 struct Program {
     Program(const vector<ll> original_numbers, const vector<ll>& original_inputs) : ip(0), relative_base(0) {
         for (int i = 0; i < (int)original_numbers.size(); ++i) {
@@ -52,14 +50,6 @@ struct Program {
         for (auto iv : original_inputs) {
             inputs.push(iv);
         }
-    }
-
-    inline ll get_number(ll idx) {
-        auto it = numbers.find(idx);
-        if (it == numbers.end()) {
-            return 0;
-        }
-        return it->second;
     }
 
     int get_opcode(int idx) {
@@ -73,12 +63,10 @@ struct Program {
     ll get_value(int idx) {
         int opcode = get_opcode(idx);
         if (opcode == 1) {
-            return get_number(ip + idx);
-        } else if (opcode == 2) {
-            return get_number(relative_base + get_number(ip + idx));
-        } else {
-            return get_number(get_number(ip + idx));
+            return numbers[ip + idx];
         }
+        ll offset = (opcode == 2 ? relative_base : 0);
+        return numbers[offset + numbers[ip + idx]];
     }
 
     void set_value(ll idx, ll value) {
@@ -94,8 +82,8 @@ struct Program {
     }
     bool run_till_input_needed(vector<ll>& outputs) {
         outputs.clear();
-        for (; get_number(ip) != 99;) {
-            switch (get_number(ip) % 100) {
+        while (true) {
+            switch (numbers[ip] % 100) {
                 case 1:
                     set_value(3, get_value(1) + get_value(2));
                     ip += 4;
