@@ -119,28 +119,16 @@ int main() {
         }
     }
     cout << "Part 1 " << res1 << endl;
-
-    
-    vector<vektor> temp;
+    set<vektor> temp;
     for (int i = 0; i < (int)points.size(); ++i) {
         if (i == best_center_idx) {
             continue;
         }
-        temp.push_back(vektor(points[i], points[best_center_idx]));
+        temp.insert(vektor(points[i], points[best_center_idx]));
     }
-    sort(all(temp));
-    vector<pair<int, pair<vektor, ll> > > orders;
-    for (int i = 0; i < (int)temp.size(); ++i) {
-        pair<vektor, ll> current{temp[i], max(abs(temp[i].dx), abs(temp[i].dy))};
-        if (orders.size() == 0 || !(orders.back().second.first == temp[i])) {
-            orders.push_back({0, current});
-        } else {
-            orders.push_back({orders.back().first + 1, current});
-        }
-    }
-    sort(all(orders));
-    ll answerx = points[best_center_idx].x + orders[199].second.first.dx;
-    ll answery = points[best_center_idx].y + orders[199].second.first.dy;
+    vector<vektor> help(all(temp));
+    ll answerx = points[best_center_idx].x + help[199].dx;
+    ll answery = points[best_center_idx].y + help[199].dy;
     cout << "Part 2 " << answery * 100 + answerx << endl;
     return 0;
 }
