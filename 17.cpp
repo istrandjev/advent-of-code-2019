@@ -161,8 +161,6 @@ int main() {
     }
     inputs.push_back(int('n'));
     inputs.push_back(10);
-    Program program2(numbers, inputs);
-    program2.run_till_input_needed(outputs);
-    cout << "Part 2 " << outputs.back() << endl;
+    cout << "Part 2 " << Program(numbers, inputs).get_output() << endl;
     return 0;
 }

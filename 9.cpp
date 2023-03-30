@@ -33,11 +33,7 @@ int main() {
     getline(cin, s);
     vector<ll> numbers = Program::parse_numbers(s);
     vector<ll> outputs;
-    Program program(numbers, {1});
-    program.run_till_input_needed(outputs);
-    cout << "Part 1 " << outputs.back() << endl;
-    Program program2(numbers, {2});
-    program2.run_till_input_needed(outputs);
-    cout << "Part 2 " << outputs.back() << endl;
+    cout << "Part 1 " << Program(numbers, {1}).get_output() << endl;
+    cout << "Part 2 " << Program(numbers, {2}).get_output() << endl;
     return 0;
 }

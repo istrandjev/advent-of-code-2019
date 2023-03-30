@@ -129,6 +129,12 @@ struct Program {
         return false;
     }
 
+    long long get_output() {
+        std::vector<long long> outputs;
+        run_till_input_needed(outputs);
+        return outputs.back();
+    }
+
     long long ip;
     long long relative_base;
     std::queue<long long> inputs;

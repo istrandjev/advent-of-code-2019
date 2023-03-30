@@ -31,7 +31,6 @@ int moves[4][2] = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
 int dirs[4] = {0, 2, 3, 1};
 
 vector<string> field;
-vector<ll> outputs;
 void dfs(int y, int x, Program& program) {
     for (int l = 0; l < 4; ++l) {
         int ty = y + moves[dirs[l]][0];
@@ -43,13 +42,13 @@ void dfs(int y, int x, Program& program) {
             continue;
         }
         program.inputs.push(l + 1);
-        program.run_till_input_needed(outputs);
-        if (outputs.back() == 0) {
+        ll output = program.get_output();
+        if (output == 0) {
             field[ty][tx] = '#';
             continue;
         }
         
-        if (outputs.back() == 1) {
+        if (output == 1) {
             field[ty][tx] = '.';
         } else {
             field[ty][tx] = '$';

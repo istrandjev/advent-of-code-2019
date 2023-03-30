@@ -28,10 +28,7 @@ using namespace std;
 typedef long long ll;
 
 bool check(const vector<ll>& numbers, int x, int y) {
-    Program program(numbers, {x, y});
-    vector<ll> outputs;
-    program.run_till_input_needed(outputs);
-    return outputs.back();
+    return Program(numbers, {x, y}).get_output();
 }
 
 pair<int, int> get_interval(const vector<ll>& numbers, int y) {
