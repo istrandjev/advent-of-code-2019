@@ -7,22 +7,6 @@
 #include <queue>
 #include <unordered_map>
 
-// vector<string> split(const string& s, char delim=' ') {
-//     vector<string> res;
-//     string cur;
-//     for (auto c : s) {
-//         if (c == delim) {
-//             res.push_back(cur);
-//             cur = "";
-//         } else {
-//             cur.push_back(c);
-//         }
-//     }
-//     if (s.back() != delim) {
-//         res.push_back(cur);
-//     }
-//     return res;
-// }
 
 struct Program {
     Program(const std::vector<long long> original_numbers, const std::vector<long long>& original_inputs) : ip(0), relative_base(0) {
